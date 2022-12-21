@@ -1,0 +1,57 @@
+Q1. Show a list of every book and their authors.? 
+SELECT  books.name as 'Book Name' ,concat(authors.first_name," ", authors.surname) as 'full name'  
+FROM books
+JOIN book_authors
+ON book_authors.book_id = books.id
+JOIN authors
+ON book_authors.author_id = authors.id
+
+
+Q2. Order the publishers by the number of books they have published.?
+SELECT publishers.name as'Publishers name', COUNT(books.publisher_id)as'The number of book publishers ' 
+FROM publishers
+JOIN books
+ON books.publisher_id = publishers.id
+GROUP BY publishers.name
+ORDER BY COUNT(books.publisher_id) DESC;
+
+
+Q3. Find all books released after 1st Jan 1996, ordered by the number of people who wrote them.?
+SELECT books.name as 'Books name', COUNT(book_authors.book_id)as 'Sum books'
+FROM books
+JOIN book_authors
+ON books.id = book_authors.book_id
+WHERE books.release_date > '1.1.1996'
+GROUP BY books.name
+ORDER BY COUNT(book_authors.book_id) DESC;
+
+
+Q4.  What’s the highest number of authors per book? The lowest?
+1.the highest 
+SELECT books.name, COUNT(book_authors.book_id)AS'highest book' FROM books
+JOIN book_authors
+ON books.id = book_authors.book_id
+GROUP BY books.name.
+ORDER BY COUNT(book_authors.book_id) DESC LIMIT 1;
+Q4.2.the lowest 
+SELECT books.name, COUNT(book_authors.book_id)AS'lowest  book' FROM books
+JOIN book_authors
+ON books.id = book_authors.book_id
+GROUP BY books.name.
+ORDER BY COUNT(book_authors.book_id) LIMIT 1;
+
+
+Q5. Who wrote the most books? How many did they write?
+SELECT CONCAT(authors.first_name," ", authors.surname)as'full name'
+,COUNT(book_authors.author_id) AS  Total_Write
+FROM authors
+JOIN book_authors
+ON authors.id = book_authors.author_id
+GROUP BY authors.first_name, authors.surname
+ORDER BY Total_Write DESC LIMIT 1;*/
+ 
+
+
+
+
+
